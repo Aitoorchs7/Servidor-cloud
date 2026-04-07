@@ -7,16 +7,19 @@ public class FogNode {
     }
     public void processData(SensorData data){
         System.out.println("[FOG] Dato recibido: "+data);
+        if(alertCount <20) {
+            if (data.getTemperature() > 30) {
+                alertCount++;
 
-        if(data.getTemperature()>30) {
-            alertCount++;
-            System.out.println("[FOG] Alerta: temperatura alta");
+                System.out.println("[FOG] Alerta: temperatura alta");
+            } else {
+                System.out.println("[FOG] Temperatura normal");
+            }
+            cloudServer.saveData(data);
         }
-        else {
-            System.out.println("[FOG] Temperatura normal");
+        else{
+            System.out.println("[FOG] Límite de alertas alcanzado");
         }
-
-        cloudServer.saveData(data);
     }
     public int getAlertCount() {
         return alertCount;
