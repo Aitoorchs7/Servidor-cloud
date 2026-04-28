@@ -7,14 +7,14 @@ public class FogNode {
     private final int id;
     private final CloudServer cloudServer;
     private int contadorAlerta;
-    // NUEVO: Lista temporal para guardar los datos antes de enviarlos (Buffer)
+
     private final List<SensorData> dataBuffer;
 
     public FogNode(int id, CloudServer cloudServer) {
         this.id = id;
         this.cloudServer = cloudServer;
         this.contadorAlerta = 0;
-        this.dataBuffer = new ArrayList<>(); // Inicializamos el buffer
+        this.dataBuffer = new ArrayList<>();  
     }
 
     public void procesarDatos(SensorData data) {
@@ -33,12 +33,11 @@ public class FogNode {
                 System.out.println("[FOG " + this.id + "] Temperatura normal");
             }
 
-            // 2. LÓGICA DEL DÍA 21/04: Almacenar en lotes de 5
-            dataBuffer.add(data); // Añadimos el dato al buffer en lugar de enviarlo directo
+            dataBuffer.add(data); 
             
             // Comprobamos si ya tenemos 5 datos guardados
             if (dataBuffer.size() == 5) {
-                System.out.println("\n⏳ [FOG " + this.id + "] Lote de 5 datos completado. Procesando...");
+                System.out.println("[FOG " + this.id + "] Lote de 5 datos completado. Procesando...");
                 
                 // Generamos la espera de procesamiento (2 segundos)
                 try {
