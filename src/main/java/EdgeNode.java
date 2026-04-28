@@ -12,10 +12,10 @@ public class EdgeNode {
         this.fogNode = fogNode;
     }
 
-    public void sendData(int totalReadings) {
-        for(int i = 1; i <= totalReadings; i++) {
+    public void enviarDatos(int leidos) {
+        for(int i = 1; i <= leidos; i++) {
             // Comprobación DÍA 7: Si ya llegamos a 20, dejamos de tomar temperaturas.
-            if (fogNode.getAlertCount() >= 20) {
+            if (fogNode.getContadorAlertas() >= 20) {
                 break; 
             }
 
@@ -23,10 +23,10 @@ public class EdgeNode {
             // Identificador que cumple el DÍA 14 (mostrando número de fog y edge)
             String devId = "Fog-" + fogNode.getId() + "_Edge-" + this.id;
             
-            SensorData data = new SensorData(devId, temperature);
-            System.out.println("[EDGE " + this.id + "] Enviando lectura " + i + ": " + data);
+            SensorData datos = new SensorData(devId, temperature);
+            System.out.println("[EDGE " + this.id + "] Enviando lectura " + i + ": " + datos);
             
-            fogNode.processData(data);
+            fogNode.procesarDatos(datos);
             System.out.println();
         }
     }

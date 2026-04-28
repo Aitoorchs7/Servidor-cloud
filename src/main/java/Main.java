@@ -26,20 +26,20 @@ public class Main {
 
         System.out.println("======== Simulación Cloud - Fog - Edge ========\n");
         System.out.println("Escriba el número MÁXIMO de datos que generará CADA Edge:");
-        int numData = sc.nextInt();
+        int numDatos = sc.nextInt();
         System.out.println("\n--- INICIANDO ENVÍO DE DATOS EN ORDEN ---\n");
 
         // Hacemos que cada Edge mande sus temperaturas en orden
         for (EdgeNode edge : edges) {
-            edge.sendData(numData);
+            edge.enviarDatos(numDatos);
         }
 
         // Resumen Final
-        cloudServer.showData();
+        cloudServer.verDatos();
         
         System.out.println("\n======== RESUMEN DE ALERTAS POR FOG ========");
         for (FogNode fog : fogs) {
-            System.out.println("Fog " + fog.getId() + " - Alertas detectadas: " + fog.getAlertCount());
+            System.out.println("Fog " + fog.getId() + " - Alertas detectadas: " + fog.getContadorAlertas());
         }
         
         sc.close();

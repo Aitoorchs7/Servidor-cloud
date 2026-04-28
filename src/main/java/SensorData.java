@@ -3,21 +3,21 @@ package main.java;
 public class SensorData {
 
     private final String deviceId;
-    private final double temperature;
+    private final double temperatura;
 
-    public SensorData(String devideId, double temperature) {
+    public SensorData(String devideId, double temperatura) {
         this.deviceId = devideId;
-        this.temperature = temperature;
+        this.temperatura = temperatura;
     }
     public String getDeviceId() {
         return deviceId;
     }
-    public double getTemperature() {
-        return temperature;
+    public double getTemperatura() {
+        return temperatura;
     }
 
     @Override
     public String toString() {
-        return "Device: "+deviceId+", Temp: "+String.format("%.2f", temperature);
+        return "Device: "+deviceId+", Temp: "+String.format("%.2f", temperatura);
     }
 }

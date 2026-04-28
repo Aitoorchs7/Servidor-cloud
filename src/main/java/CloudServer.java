@@ -11,7 +11,7 @@ public class CloudServer {
         System.out.println("[CLOUD] Dato guardado: " + data);
     }
 
-    public void showData() {
+    public void verDatos() {
         double sum = 0;
         double average;
 
@@ -24,7 +24,7 @@ public class CloudServer {
 
         for(SensorData data : dataList){
             System.out.println(data);
-            sum += data.getTemperature();
+            sum += data.getTemperatura();
         }
 
         average = sum / dataList.size();

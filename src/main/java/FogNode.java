@@ -6,27 +6,27 @@ import java.util.List;
 public class FogNode {
     private final int id;
     private final CloudServer cloudServer;
-    private int alertCount;
+    private int contadorAlerta;
     // NUEVO: Lista temporal para guardar los datos antes de enviarlos (Buffer)
     private final List<SensorData> dataBuffer;
 
     public FogNode(int id, CloudServer cloudServer) {
         this.id = id;
         this.cloudServer = cloudServer;
-        this.alertCount = 0;
+        this.contadorAlerta = 0;
         this.dataBuffer = new ArrayList<>(); // Inicializamos el buffer
     }
 
-    public void processData(SensorData data) {
+    public void procesarDatos(SensorData data) {
         System.out.println("[FOG " + this.id + "] Dato recibido: " + data);
         
-        if (alertCount < 20) {
+        if (contadorAlerta < 20) {
             // 1. Comprobación de temperatura
-            if (data.getTemperature() > 30) {
-                alertCount++;
-                System.out.println("[FOG " + this.id + "] Alerta: temperatura alta. (Alertas actuales: " + alertCount + ")");
+            if (data.getTemperatura() > 30) {
+                contadorAlerta++;
+                System.out.println("[FOG " + this.id + "] Alerta: temperatura alta. (Alertas actuales: " + contadorAlerta + ")");
                 
-                if(alertCount == 20) {
+                if(contadorAlerta == 20) {
                     System.out.println(">>> [FOG " + this.id + "] Ha alcanzado el LÍMITE de 20 alertas. Dejará de tomar datos. <<<");
                 }
             } else {
@@ -54,7 +54,7 @@ public class FogNode {
                 
                 // Vaciamos la lista para prepararla para los siguientes 5 datos
                 dataBuffer.clear();
-                System.out.println("✅ [FOG " + this.id + "] Lote enviado al Cloud con éxito.\n");
+                System.out.println("[FOG " + this.id + "] Lote enviado al Cloud con éxito.\n");
             }
             
         } else {
@@ -66,11 +66,11 @@ public class FogNode {
         return id;
     }
 
-    public int getAlertCount() {
-        return alertCount;
+    public int getContadorAlertas() {
+        return contadorAlerta;
     }
 
-    public void setAlertCount(int alertCount) {
-        this.alertCount = alertCount;
+    public void setContadorAlertas(int contadorAlerta) {
+        this.contadorAlerta = contadorAlerta;
     }
 }
